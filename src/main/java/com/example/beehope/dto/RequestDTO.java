@@ -16,7 +16,7 @@ public class RequestDTO {
     @NotBlank(message = "Name is required!")
     private String name;
     private String description;
-    @NotBlank(message = "Name is required!")
+    @NotBlank(message = "coordinates is required!")
     private String coordinates;
     private String status;
 }

@@ -34,7 +34,7 @@ public class RequestController {
     @GetMapping(value = "/requests/{id}")
     ResponseEntity<Request> getById(@PathVariable("id") @Min(1) int id) {
         Request request = requestService.findById(id)
-                .orElseThrow(()->new NoSuchElementException("No Request with ID : "+id));
+                .orElseThrow(ThereIsNoSuchRequestException::new);
         return ResponseEntity.ok().body(request);
     }
 
@@ -54,8 +54,7 @@ public class RequestController {
     @PutMapping(value = "/requests/{id}")
     ResponseEntity<Request> updateRequest(@PathVariable("id") @Min(1) int id, @Valid @RequestBody RequestDTO inRequest) {
         Request request = requestService.findById(id)
-                .orElseThrow(()->new NoSuchElementException("No Request with ID : "+id));
-
+                .orElseThrow(ThereIsNoSuchRequestException::new);
         Request newRequest = RequestMapper.DtoToEntity(inRequest);
         newRequest.setId(request.getId());
         requestService.save(newRequest);
@@ -66,7 +65,7 @@ public class RequestController {
     @DeleteMapping(value = "/requests/{id}")
     ResponseEntity deleteProduct(@PathVariable("id") @Min(1) int id) {
         Request request = requestService.findById(id)
-                .orElseThrow(NullPointerException::new);
+                .orElseThrow(ThereIsNoSuchRequestException::new);
         requestService.delete(request.getId());
         return ResponseEntity.ok().body("Request with ID : " + id + " deleted with success!");
     }
