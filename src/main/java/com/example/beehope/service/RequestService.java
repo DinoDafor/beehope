@@ -34,4 +34,7 @@ public class RequestService implements IRequest {
     public void delete(int id) {
         requestRepository.deleteById(id);
     }
+    public List<String> findAllImages(){
+       return requestRepository.findImages();
+    }
 }
