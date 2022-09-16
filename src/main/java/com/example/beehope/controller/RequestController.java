@@ -52,10 +52,20 @@ public class RequestController {
     }
 
     //Добавление новой заявки
+    @ResponseBody
     @PostMapping(value = "/requests")
-    ResponseEntity<?> createRequest(@Valid @RequestBody RequestDTO inRequest) {
-        Request request = RequestMapper.DtoToEntity(inRequest);
+    ResponseEntity<?> createRequest( RequestDTO inRequest, MultipartFile file) {
+        Request request = RequestMapper.DtoToEntity(inRequest, file);
         Request addedRequest = requestService.save(request);
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        Path path = Paths.get(fileName);
+        try {
+            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(addedRequest.getId())

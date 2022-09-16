@@ -26,7 +26,6 @@ public class Request {
     private String description;
     private String coordinates;
     private String status;
+    private String image;
     //@Column
-//    photo?;
-
 }
