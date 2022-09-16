@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS requests;
 create table requests
-(   id int primary key AUTO_INCREMENT,
+(   id int primary key,
     name        char(50) NOT NULL,
     description char(50),
     coordinates char(50) NOT NULL,

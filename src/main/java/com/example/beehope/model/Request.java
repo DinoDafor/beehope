@@ -13,10 +13,7 @@ import javax.persistence.*;
 @Accessors(chain = true)
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class) //для автоматической даты и модификации даты
 @NoArgsConstructor
-//todo другой конструктор?
-//  @CreatedDate @LastModifiedDate
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
