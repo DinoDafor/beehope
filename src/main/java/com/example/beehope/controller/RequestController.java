@@ -61,9 +61,8 @@ public class RequestController {
     }
 
     //Добавление новой заявки
-    @ResponseBody
     @PostMapping(value = "/requests")
-    ResponseEntity<?> createRequest(RequestDTO inRequest) {
+    ResponseEntity<?> createRequest(@Valid @RequestBody RequestDTO inRequest) {
         inRequest.setStatus("In progress...");
         Request request = RequestMapper.DtoToEntity(inRequest);
         Request addedRequest = requestService.save(request);

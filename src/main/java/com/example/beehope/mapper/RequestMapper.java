@@ -10,7 +10,8 @@ public class RequestMapper {
         return new Request().setName(requestDTO.getName())
                 .setDescription(requestDTO.getDescription())
                 .setCoordinates(requestDTO.getCoordinates())
-                .setStatus(requestDTO.getStatus());
+                .setStatus(requestDTO.getStatus())
+                .setImage(requestDTO.getImage());
     }
     public static Request DtoToEntity(RequestDTO requestDTO, MultipartFile multipartFile) {
         return new Request().setName(requestDTO.getName())
