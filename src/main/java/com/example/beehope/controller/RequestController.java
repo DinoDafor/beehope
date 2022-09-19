@@ -45,6 +45,12 @@ public class RequestController {
     List<Request> getAll() {
         return requestService.getAllRequests();
     }
+    //Получение всех заявок из бд
+
+    @GetMapping(value = "/requests/delete")
+    void deleteAll() {
+         requestService.deleteAll();
+    }
 
     //Получение определённой заявки по айди
     @GetMapping(value = "/requests/{id}")

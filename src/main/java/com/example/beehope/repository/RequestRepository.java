@@ -12,4 +12,6 @@ import java.util.List;
 public interface RequestRepository extends JpaRepository<Request, Integer> {
     @Query(nativeQuery = true, value = "SELECT image FROM requests")
     List<String> findImages();
+
 }
+

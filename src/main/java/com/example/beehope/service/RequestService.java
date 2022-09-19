@@ -37,4 +37,8 @@ public class RequestService implements IRequest {
     public List<String> findAllImages(){
        return requestRepository.findImages();
     }
+
+    public void deleteAll() {
+        requestRepository.deleteAll();
+    }
 }
