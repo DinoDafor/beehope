@@ -19,10 +19,10 @@ public class RequestMapper {
                 .setStatus(requestDTO.getStatus())
                 .setImage(multipartFile.getOriginalFilename());
     }
-    public static RequestDTO EntityToDto(Request request) {
-        return new RequestDTO().setName(request.getName())
-                .setDescription(request.getDescription())
-                .setCoordinates(request.getCoordinates())
-                .setStatus(request.getStatus());
-    }
+//    public static RequestDTO EntityToDto(Request request) {
+//        return new RequestDTO().setName(request.getName())
+//                .setDescription(request.getDescription())
+//                .setCoordinates(request.getCoordinates())
+//                .setStatus(request.getStatus());
+//    }
 }

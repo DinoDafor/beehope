@@ -57,17 +57,18 @@ public class RequestController {
     //Добавление новой заявки
     @ResponseBody
     @PostMapping(value = "/requests")
-    ResponseEntity<?> createRequest(RequestDTO inRequest, MultipartFile file) {
-        Request request = RequestMapper.DtoToEntity(inRequest, file);
+    ResponseEntity<?> createRequest(RequestDTO inRequest) {
+        inRequest.setStatus("In progress...");
+        Request request = RequestMapper.DtoToEntity(inRequest);
         Request addedRequest = requestService.save(request);
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-        Path path = Paths.get(fileName);
-        try {
-            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        Path path = Paths.get(fileName);
+//        try {
+//            Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -129,23 +130,23 @@ public class RequestController {
                 .body(resource);
     }
     //Загрузка всех фоток в zip архиве
-    @GetMapping(value = "/zip-download", produces = "application/zip")
-    public void zipDownload(HttpServletResponse response) throws IOException {
-        List<String> images = requestService.findAllImages();
-        ZipOutputStream zipOut = new ZipOutputStream(response.getOutputStream());
-        for (String fileName : images) {
-            FileSystemResource resource = new FileSystemResource(fileName);
-            ZipEntry zipEntry = new ZipEntry(resource.getFilename());
-            zipEntry.setSize(resource.contentLength());
-            zipOut.putNextEntry(zipEntry);
-            StreamUtils.copy(resource.getInputStream(), zipOut);
-            zipOut.closeEntry();
-        }
-        zipOut.finish();
-        zipOut.close();
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "zipAnimals" + "\"");
-    }
+//    @GetMapping(value = "/zip-download", produces = "application/zip")
+//    public void zipDownload(HttpServletResponse response) throws IOException {
+//        List<String> images = requestService.findAllImages();
+//        ZipOutputStream zipOut = new ZipOutputStream(response.getOutputStream());
+//        for (String fileName : images) {
+//            FileSystemResource resource = new FileSystemResource(fileName);
+//            ZipEntry zipEntry = new ZipEntry(resource.getFilename());
+//            zipEntry.setSize(resource.contentLength());
+//            zipOut.putNextEntry(zipEntry);
+//            StreamUtils.copy(resource.getInputStream(), zipOut);
+//            zipOut.closeEntry();
+//        }
+//        zipOut.finish();
+//        zipOut.close();
+//        response.setStatus(HttpServletResponse.SC_OK);
+//        response.addHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + "zipAnimals" + "\"");
+//    }
 
 }
 

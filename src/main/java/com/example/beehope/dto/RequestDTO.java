@@ -19,4 +19,5 @@ public class RequestDTO {
     @NotBlank(message = "coordinates is required!")
     private String coordinates;
     private String status;
+    private String image;
 }
